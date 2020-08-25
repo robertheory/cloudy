@@ -1,4 +1,4 @@
-export default interface IWeatherResponse {
+export default interface ICurrentWeatherDataApiResponse {
   coord: {
     lon: number;
     lat: number;

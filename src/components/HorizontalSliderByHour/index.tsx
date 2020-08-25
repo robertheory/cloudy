@@ -1,78 +1,41 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Safe, Container, Card, Hour, Temperature} from './styles';
 import Icon from 'react-native-vector-icons/Feather';
+import {kelvinToCelcius, normalizeDate} from '../../utils/Conversor';
 
-const HorizontalSliderByHour = () => {
+import IWeatherResponse from '../../models/IOneCallApiResponse';
+import IHourly from '../../models/IHourly';
+
+interface IHorizontalSliderByHour {
+  weather: IWeatherResponse;
+}
+
+const HorizontalSliderByHour: React.FC<IHorizontalSliderByHour> = ({
+  weather,
+}) => {
+  const [hourly, setHourly] = useState<IHourly[]>();
+
+  useEffect(() => {
+    setHourly(weather.hourly);
+  }, [weather]);
+
   return (
-    <Safe>
-      <Container horizontal showsHorizontalScrollIndicator={false}>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-        <Card>
-          <Hour>12AM</Hour>
-          <Icon name="cloud" color="white" size={15} />
-          <Temperature>26°C</Temperature>
-        </Card>
-      </Container>
-    </Safe>
+    !!weather && (
+      <Safe>
+        <Container horizontal showsHorizontalScrollIndicator={false}>
+          {!!hourly &&
+            hourly.map((hour) => (
+              <Card key={hour.dt}>
+                <Hour>{normalizeDate(hour.dt)}</Hour>
+
+                <Icon name="cloud" color="white" size={25} />
+
+                <Temperature>{kelvinToCelcius(hour.temp)}°C</Temperature>
+              </Card>
+            ))}
+        </Container>
+      </Safe>
+    )
   );
 };
 

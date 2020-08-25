@@ -11,18 +11,7 @@ import Today from '../../components/Today';
 import DayReport from '../../components/DayReport';
 import key from '../../config/api';
 
-import IWeatherResponse from '../../models/IWeatherResponse';
-
-interface CityListItem {
-  id: number;
-  name: string;
-  state: string;
-  country: string;
-  coord: {
-    lat: number;
-    lon: number;
-  };
-}
+import IWeatherResponse from '../../models/IOneCallApiResponse';
 
 const Home: React.FC | any = () => {
   const [weather, setWeather] = useState<IWeatherResponse | null>();
@@ -35,7 +24,7 @@ const Home: React.FC | any = () => {
 
         api
           .get<IWeatherResponse | null>(
-            `/weather?lat=${location?.coords.latitude}&lon=${location?.coords.longitude}&appid=${key}`,
+            `/onecall?lat=${location?.coords.latitude}&lon=${location?.coords.longitude}&appid=${key}`,
           )
           .then((response) => {
             setWeather(response.data);
@@ -53,7 +42,7 @@ const Home: React.FC | any = () => {
       <Container>
         <Title>Cloudy</Title>
         <Today weather={weather} />
-        <DayReport />
+        <DayReport weather={weather} />
       </Container>
     )
   );

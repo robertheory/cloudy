@@ -3,3 +3,8 @@ export function kelvinToCelcius<Number>(kelvin: number, fixed = 1) {
 
   return result;
 }
+export function normalizeDate<Number>(date: number) {
+  const result = new Date(date).toTimeString().split('GMT')[0];
+
+  return result;
+}

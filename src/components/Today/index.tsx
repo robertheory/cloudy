@@ -10,12 +10,12 @@ import {
   Location,
   Measure,
   Text,
-  TextMinMax,
+  // TextMinMax,
 } from './styles';
 import Icon from 'react-native-vector-icons/Feather';
 import {kelvinToCelcius} from '../../utils/Conversor';
 
-import IWeatherResponse from '../../models/IWeatherResponse';
+import IWeatherResponse from '../../models/IOneCallApiResponse';
 
 interface IToday {
   weather: IWeatherResponse;
@@ -35,20 +35,18 @@ const Today: React.FC<IToday> = ({weather}) => {
           </DateContainer>
         </Header>
         <Temperature>
-          <Value>{kelvinToCelcius(weather.main.temp)}</Value>
+          <Value>{kelvinToCelcius(weather.current.temp)}</Value>
           <Measure>°C</Measure>
         </Temperature>
         <Text>
-          Feels Like
-          {' ' + kelvinToCelcius(weather.main.feels_like) + ' °C'}
+          {'Feels Like ' + kelvinToCelcius(weather.current.feels_like) + ' °C'}
         </Text>
-        <TextMinMax>
-          <Text>{'Min ' + kelvinToCelcius(weather.main.temp_min) + ' °C'}</Text>
-          <Text>{'Max ' + kelvinToCelcius(weather.main.temp_max) + ' °C'}</Text>
-        </TextMinMax>
-        <Location>
-          {weather.name} - {weather.sys.country}
-        </Location>
+        {/* <TextMinMax> */}
+        <Text>{'Humidity ' + weather.current.humidity + '%'}</Text>
+        <Text>{'Pressure ' + weather.current.pressure + ' hPa'}</Text>
+        <Text>{'Wind Speed ' + weather.current.wind_speed + ' km/h'}</Text>
+        {/* </TextMinMax> */}
+        <Location>{weather.timezone}</Location>
       </Container>
     )
   );
