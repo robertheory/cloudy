@@ -4,7 +4,7 @@ export default interface IWeatherResponse {
   timezone: string;
   timezone_offset: number;
   current: {
-    dt: number;
+    dt: Date;
     sunrise: number;
     sunset: number;
     temp: number;
@@ -31,13 +31,13 @@ export default interface IWeatherResponse {
   };
   minutely: [
     {
-      dt: number;
+      dt: Date;
       precipitation: number;
     },
   ];
   hourly: [
     {
-      dt: number;
+      dt: Date;
       temp: number;
       feels_like: number;
       pressure: number;

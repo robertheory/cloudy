@@ -11,15 +11,15 @@ export const Container = styled.ScrollView`
 
 export const Card = styled.View`
   background-color: #011d49;
-  border: 1px solid white;
-  border-radius: 40px;
-  padding: 10px;
-  margin: 3px;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 15px 8px;
+  margin: 9px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 100px;
+  height: 120px;
 `;
 
 export const Hour = styled.Text`
@@ -28,4 +28,9 @@ export const Hour = styled.Text`
 
 export const Temperature = styled.Text`
   color: white;
+`;
+
+export const WeatherIcon = styled.Image`
+  width: 50;
+  height: 50;
 `;

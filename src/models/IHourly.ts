@@ -1,5 +1,5 @@
 export default interface IHourly {
-  dt: number;
+  dt: Date;
   temp: number;
   feels_like: number;
   pressure: number;
