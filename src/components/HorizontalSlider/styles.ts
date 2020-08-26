@@ -31,6 +31,6 @@ export const Temperature = styled.Text`
 `;
 
 export const WeatherIcon = styled.Image`
-  width: 50;
-  height: 50;
+  width: 50px;
+  height: 50px;
 `;

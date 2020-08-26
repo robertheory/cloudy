@@ -27,8 +27,8 @@ export const DateContainer = styled.View`
 `;
 
 export const WeatherIcon = styled.Image`
-  width: 50;
-  height: 50;
+  width: 50px;
+  height: 50px;
 `;
 
 export const Title = styled.Text`
@@ -60,9 +60,19 @@ export const Measure = styled.Text`
   transform: translateY(20px);
 `;
 
+export const LocationContainer = styled.View`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
 export const Location = styled.Text`
   color: white;
   font-size: 20px;
+  margin: 0px;
 `;
 
 export const TextMinMax = styled.View`

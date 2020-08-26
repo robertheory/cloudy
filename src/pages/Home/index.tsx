@@ -17,25 +17,24 @@ import api from '../../services/api';
 import Today from '../../components/Today';
 import DayReport from '../../components/DayReport';
 import Loader from '../../components/Loader';
-import key from '../../config/api';
+import {weatherKey} from '../../config/api';
 
 import IWeatherResponse from '../../models/IOneCallApiResponse';
 
 const Home: React.FC | any = () => {
   const [weather, setWeather] = useState<IWeatherResponse | null>();
-  const [location, setLocation] = useState<GeolocationResponse>();
+  const [location, setLocation] = useState<GeolocationResponse | null>();
 
   useEffect(() => {
     Geolocation.getCurrentPosition(
       (position) => {
-        setLocation(position);
-
         api
           .get<IWeatherResponse | null>(
-            `/onecall?lat=${location?.coords.latitude}&lon=${location?.coords.longitude}&appid=${key}`,
+            `/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${weatherKey}`,
           )
           .then((response) => {
             setWeather(response.data);
+            setLocation(position);
           });
       },
       (error) => {
@@ -45,13 +44,13 @@ const Home: React.FC | any = () => {
     );
   }, [location]);
 
-  return !location || !weather ? (
+  return !weather || !location ? (
     <Loader />
   ) : (
     <Container>
       <RefreshButton
         onPress={() => {
-          setLocation(undefined);
+          setLocation(null);
         }}>
         <RefreshIcon name="refresh-cw" size={25} />
       </RefreshButton>
@@ -59,7 +58,7 @@ const Home: React.FC | any = () => {
         <Logo name="cloud" />
         <TitleText>Cloudy</TitleText>
       </Title>
-      <Today weather={weather} />
+      <Today weather={weather} location={location} />
       <DayReport weather={weather} />
     </Container>
   );
