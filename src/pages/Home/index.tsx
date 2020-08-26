@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Title, RefreshIcon, RefreshButton} from './styles';
+import {
+  Container,
+  Title,
+  TitleText,
+  RefreshIcon,
+  RefreshButton,
+  Logo,
+} from './styles';
 import Geolocation, {
   GeolocationResponse,
 } from '@react-native-community/geolocation';
@@ -48,7 +55,10 @@ const Home: React.FC | any = () => {
         }}>
         <RefreshIcon name="refresh-cw" size={25} />
       </RefreshButton>
-      <Title>Cloudy</Title>
+      <Title>
+        <Logo name="cloud" />
+        <TitleText>Cloudy</TitleText>
+      </Title>
       <Today weather={weather} />
       <DayReport weather={weather} />
     </Container>

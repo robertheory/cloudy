@@ -9,9 +9,25 @@ export const Container = styled.View`
   color: white;
 `;
 
-export const Title = styled.Text`
+export const Title = styled.View`
   color: white;
   font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TitleText = styled.Text`
+  color: white;
+  font-size: 20px;
+`;
+
+export const Logo = styled(Icon)`
+  color: white;
+  font-size: 20px;
+  margin-right: 10px;
 `;
 
 export const Text = styled.Text`

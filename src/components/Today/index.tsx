@@ -10,9 +10,8 @@ import {
   Location,
   Measure,
   Text,
-  // TextMinMax,
+  WeatherIcon,
 } from './styles';
-import Icon from 'react-native-vector-icons/Feather';
 import {kelvinToCelcius} from '../../utils/Conversor';
 
 import IWeatherResponse from '../../models/IOneCallApiResponse';
@@ -28,7 +27,11 @@ const Today: React.FC<IToday> = ({weather}) => {
     !!weather && (
       <Container>
         <Header>
-          <Icon name="cloud-drizzle" color="white" size={30} />
+          <WeatherIcon
+            source={{
+              uri: `http://openweathermap.org/img/wn/${weather.current.weather[0].icon}.png`,
+            }}
+          />
           <DateContainer>
             <Title>Today</Title>
             <Sub>{date}</Sub>

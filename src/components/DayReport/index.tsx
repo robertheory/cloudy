@@ -14,7 +14,7 @@ const DayReport: React.FC<IDayReport> = ({weather}) => {
       <Container>
         <Header>
           <Button>
-            <Text>Next Days</Text>
+            <Text>Following Days</Text>
           </Button>
         </Header>
         <HorizontalSlider weather={weather} />
