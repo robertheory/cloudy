@@ -24,6 +24,7 @@ import IWeatherResponse from '../../models/IOneCallApiResponse';
 const Home: React.FC | any = () => {
   const [weather, setWeather] = useState<IWeatherResponse | null>();
   const [location, setLocation] = useState<GeolocationResponse | null>();
+  const [locationError, setLocationError] = useState<boolean>(false);
 
   useEffect(() => {
     Geolocation.getCurrentPosition(
@@ -35,7 +36,8 @@ const Home: React.FC | any = () => {
           .then((response) => {
             setWeather(response.data);
             setLocation(position);
-          });
+          })
+          .catch(() => setLocationError(true));
       },
       (error) => {
         Alert.alert('Location error', `${(error.code, error.message)}`);
@@ -45,7 +47,7 @@ const Home: React.FC | any = () => {
   }, [location]);
 
   return !weather || !location ? (
-    <Loader />
+    <Loader locationError={locationError} />
   ) : (
     <Container>
       <RefreshButton

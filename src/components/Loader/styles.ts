@@ -10,3 +10,9 @@ export const Text = styled.Text`
   color: white;
   font-size: 50px;
 `;
+
+export const ErrorText = styled.Text`
+  color: red;
+  font-size: 15px;
+  text-align: center;
+`;

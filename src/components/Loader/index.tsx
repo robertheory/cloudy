@@ -1,9 +1,13 @@
 import React from 'react';
-import {Container, Text} from './styles';
+import {Container, Text, ErrorText} from './styles';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Feather';
 
-const Loader = () => {
+interface ILoaderProps {
+  locationError: boolean;
+}
+
+const Loader: React.FC<ILoaderProps> = ({locationError}) => {
   return (
     <Container>
       <Animatable.Text
@@ -13,6 +17,11 @@ const Loader = () => {
         <Icon name="cloud" color="white" size={200} />
       </Animatable.Text>
       <Text>CLOUDY</Text>
+      {locationError && (
+        <ErrorText>
+          Location Error, please check your conection and try again
+        </ErrorText>
+      )}
     </Container>
   );
 };
