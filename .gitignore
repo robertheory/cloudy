@@ -64,3 +64,4 @@ buck-out/
 
 /src/config/**
 !/src/config/.gitkeep
+/android/app/my-upload-key.keystore
