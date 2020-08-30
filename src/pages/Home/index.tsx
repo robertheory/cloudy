@@ -30,6 +30,10 @@ const Home: React.FC | any = () => {
     authorizationLevel: 'whenInUse',
   });
   useEffect(() => {
+    getPosition();
+  }, []);
+
+  function getPosition() {
     Geolocation.getCurrentPosition(
       (position) => {
         api
@@ -38,9 +42,13 @@ const Home: React.FC | any = () => {
           )
           .then((response) => {
             setWeather(response.data);
-            setLocation(position);
+            console.log(response.data);
           })
-          .catch(() => setLocationError(true));
+          .catch((error) => {
+            setLocationError(true);
+            Alert.alert('Location error', `${(error.code, error.message)}`);
+          });
+        setLocation(position);
       },
       (error) => {
         Alert.alert('Location error', `${(error.code, error.message)}`);
@@ -48,7 +56,7 @@ const Home: React.FC | any = () => {
       },
       {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
     );
-  }, [location]);
+  }
 
   return !weather || !location ? (
     <Loader locationError={locationError} />
@@ -56,7 +64,7 @@ const Home: React.FC | any = () => {
     <Container>
       <RefreshButton
         onPress={() => {
-          setLocation(null);
+          getPosition();
         }}>
         <RefreshIcon name="refresh-cw" size={25} />
       </RefreshButton>
