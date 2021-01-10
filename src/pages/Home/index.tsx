@@ -27,12 +27,11 @@ const Home: React.FC | any = () => {
   const [locationError, setLocationError] = useState<boolean>(false);
   Geolocation.setRNConfiguration({
     skipPermissionRequests: false,
-    authorizationLevel: 'whenInUse',
+    authorizationLevel: 'auto',
   });
   useEffect(() => {
     getPosition();
   }, []);
-
   function getPosition() {
     Geolocation.getCurrentPosition(
       (position) => {
@@ -42,17 +41,15 @@ const Home: React.FC | any = () => {
           )
           .then((response) => {
             setWeather(response.data);
-            console.log(response.data);
           })
           .catch((error) => {
             setLocationError(true);
-            Alert.alert('Location error', `${(error.code, error.message)}`);
+            Alert.alert('Error', `${error.message}`);
           });
         setLocation(position);
       },
       (error) => {
-        Alert.alert('Location error', `${(error.code, error.message)}`);
-        setLocation(undefined);
+        Alert.alert('Location error', `${error.message}`);
       },
       {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
     );
